@@ -7,4 +7,6 @@ eleventyNavigation:
   order: 2
 ---
 
-<contact@code.gouv.fr>
+Pour nous contacter par courriel :
+
+`numerique-responsable.dinum@modernisation.gouv.fr`

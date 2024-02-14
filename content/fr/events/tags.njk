@@ -1,0 +1,30 @@
+---js
+{
+  title: "Agenda",
+  pagination: {
+    data: "collections.events",
+    size: 1,
+    alias: "tag",
+    before: function(paginationData, fullData) {
+      return this.paginateCollectionTags(this.filterCollectionLang(paginationData, fullData.lang), 6);
+    }
+  },
+  layout: "layouts/page.njk",
+  permalink: "/{{ lang }}/agenda/tags/{{ tag.tagName | slugify }}/{% if tag.pageNumber %}{{ pagePrefix }}{{ tag.pageNumber + 1 }}/{% endif %}",
+}
+---
+<h2>{{ "filtered_by" | i18n }}
+  <a class="fr-tag fr-fi-close-line fr-tag--icon-left" href="{{ "/agenda/"| locale_url }}">
+    {{ tag.tagName }}
+  </a>
+</h2>
+<div class="fr-mt-6v fr-mb-6w">
+  {% set tags = collections.events | filterCollectionLang | getAllTags | filterTagList([tag.tagName]) %}
+  {% set tagsUrl = "/agenda/tags/" %}
+  {% include "components/taggroup.njk" %}
+</div>
+{% set postslist = tag.pageData %}
+{% include "postslist.njk" %}
+{% set tagUrl %}{{ "/agenda/tags/"| locale_url }}{{ tag.tagName | slugify }}/{% endset %}
+{% set pagination = pagination | buildPagination(tagUrl) %}
+{% include "templates/pagination.njk" %}

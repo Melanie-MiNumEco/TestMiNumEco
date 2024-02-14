@@ -10,20 +10,21 @@
     }
   },
   layout: "layouts/page.njk",
-  permalink: "/{{ lang }}/blog/tags/{{ tag.tagName | slugify }}/{% if tag.pageNumber %}{{ pagePrefix }}{{ tag.pageNumber + 1 }}/{% endif %}",
+  permalink: "/{{ lang }}/actualites/tags/{{ tag.tagName | slugify }}/{% if tag.pageNumber %}{{ pagePrefix }}{{ tag.pageNumber + 1 }}/{% endif %}",
 }
 ---
 <h2>{{ "filtered_by" | i18n }}
-  <a class="fr-tag fr-fi-close-line fr-tag--icon-left" href="{{ "/blog/"| locale_url }}">
+  <a class="fr-tag fr-fi-close-line fr-tag--icon-left" href="{{ "/actualites/"| locale_url }}">
     {{ tag.tagName }}
   </a>
 </h2>
 <div class="fr-mt-6v fr-mb-6w">
   {% set tags = collections.posts | filterCollectionLang | getAllTags | filterTagList([tag.tagName]) %}
+  {% set tagsUrl = "/actualites/tags/" %}
   {% include "components/taggroup.njk" %}
 </div>
 {% set postslist = tag.pageData %}
 {% include "postslist.njk" %}
-{% set tagUrl %}{{ "/blog/tags/"| locale_url }}{{ tag.tagName | slugify }}/{% endset %}
+{% set tagUrl %}{{ "/actualites/tags/"| locale_url }}{{ tag.tagName | slugify }}/{% endset %}
 {% set pagination = pagination | buildPagination(tagUrl) %}
 {% include "templates/pagination.njk" %}

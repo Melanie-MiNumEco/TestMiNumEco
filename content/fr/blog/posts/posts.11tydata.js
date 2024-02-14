@@ -4,6 +4,9 @@ module.exports = {
     ],
     layout: "layouts/post.njk",
     permalink: function (data) {
-        return `/${data.lang}/blog/${data.page.fileSlug}/`;
+        return `/${data.lang}/actualites/${data.page.fileSlug}/`;
+    },
+    eleventyComputed: {
+        tagsUrl: "/actualites/tags/"
     }
 };

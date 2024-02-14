@@ -1,36 +1,39 @@
 ---
-title: Exemple de mentions légales
+title: Mentions légales
 layout: layouts/page.njk
-description: Mentions légales à compléter
 slugOverride: mentions legales
 showBreadcrumb: true
 ---
-## Identification de l'éditeur
+## Éditeur
 
-[ A COMPLETER ]
+Le site `ecoresponsable.numerique.gouv.fr` est édité par la mission MiNumEco au sein de la direction interministérielle du numérique (DINUM).
+
+Coordonnées :
+Adresse : DINUM, 20 avenue de Ségur, 75007 Paris
+Teléphone accueil : 01.71.21.01.70
+SIRET : 12000101100010 (secrétariat général du gouvernement)
+SIREN : 120 001 011
 
 ## Directeur de la publication
 
-[ A COMPLETER ]
+Directrice interministérielle du numérique.
 
-## Prestataire d'hébergement
+## Hébergement
 
-[ A COMPLETER ]
-
-## Crédits
-
-- [1F3DB.svg](https://openmoji.org/data/color/svg/1F3DB.svg) par [Martin Wehl](https://openmoji.org/library/#author=Martin%20Wehl) sous licence [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0>).
-
-[ A COMPLETER ]
+Ce site est hébergé par Github Pages, 88 Colin P Kelly Junior Street, San Francisco, CA 94107.
 
 ## Code source du site
 
-[ A COMPLETER ]
+Le [code source du site est disponible sur Github](https://github.com/DISIC/greentech).
 
 ## Accessibilité
 
-[Voir la déclaration d'accessibilité](/fr/accessibilite/).
+[Voir la déclaration d'accessibilité](/accessibilité/)
 
-## Traitement des données à caractère personnel
+## Données personnelles et cookies
 
-[Voir les informations concernant les cookies utilisées sur ce site](/fr/donnees-personnelles/).
+[Voir les informations concernant les cookies utilisées sur ce site](/données-personnelles/)
+
+## Déclaration d'écoconception
+
+[Voir la déclaration d'écoconception](/declaration-ecoconception/)
