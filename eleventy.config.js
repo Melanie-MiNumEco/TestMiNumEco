@@ -141,6 +141,8 @@ module.exports = function (eleventyConfig) {
         return collection.find(post => post.fileSlug === slug);
     });
 
+    /* Custom filters */
+
     function findNavigationEntriesExtended(nodes = [], key = '') {
         let pages = [];
         for(let entry of nodes) {
@@ -169,7 +171,35 @@ module.exports = function (eleventyConfig) {
         });
     }
 
+    function findNavigationEntryByKeys(nodes = [], keys = []) {
+        let pages = [];
+
+        for (let key of keys) {
+            for (let entry of nodes) {
+                if (entry.data && entry.data.eleventyNavigation && entry.data.eleventyNavigation.key) {
+                    let entryKey = entry.data.eleventyNavigation.key;
+
+                    if (entryKey === key) {
+                        pages.push({
+                            title: entry.data.title,
+                            url: entry.url || entry.data.page.url,
+                            data: entry.data,
+                            pluginType: 'eleventy-navigation'
+                        });
+
+                        break;
+                    }
+                }
+            }
+        }
+
+        return pages;
+    }
+
     eleventyConfig.addNunjucksFilter('eleventyNavigationExtended', findNavigationEntriesExtended);
+    eleventyConfig.addNunjucksFilter('eleventyNavigationByKeys', findNavigationEntryByKeys);
+
+    /***/
 
     // Customize Markdown library settings:
     eleventyConfig.amendLibrary("md", mdLib => {
