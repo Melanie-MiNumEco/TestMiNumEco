@@ -9,6 +9,7 @@ const pluginBundle = require("@11ty/eleventy-plugin-bundle");
 const pluginNavigation = require("@11ty/eleventy-navigation");
 const {EleventyHtmlBasePlugin} = require("@11ty/eleventy");
 const {EleventyI18nPlugin} = require("@11ty/eleventy");
+const {EleventyRenderPlugin} = require("@11ty/eleventy");
 const i18n = require("@codegouvfr/eleventy-plugin-i18n");
 const pluginCalendar = require("@codegouvfr/eleventy-plugin-calendar");
 
@@ -50,6 +51,7 @@ module.exports = function (eleventyConfig) {
     });
     eleventyConfig.addPlugin(pluginNavigation);
     eleventyConfig.addPlugin(pluginBundle);
+    eleventyConfig.addPlugin(EleventyRenderPlugin);
     eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
     eleventyConfig.addPlugin(EleventyI18nPlugin, {
         defaultLanguage: "fr",
@@ -138,6 +140,36 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addFilter("findBySlug", function find(collection = [], slug = "") {
         return collection.find(post => post.fileSlug === slug);
     });
+
+    function findNavigationEntriesExtended(nodes = [], key = '') {
+        let pages = [];
+        for(let entry of nodes) {
+            if(entry.data && entry.data.eleventyNavigation) {
+                let nav = entry.data.eleventyNavigation;
+                if(!key && !nav.parent || nav.parent === key) {
+                    pages.push(Object.assign({}, nav, {
+                        url: nav.url || entry.data.page.url,
+                        data: entry.data,
+                        pluginType: 'eleventy-navigation'
+                    }, key ? { parentKey: key } : {}));
+                }
+            }
+        }
+
+        return pages.sort(function(a, b) {
+            return (a.order || 0) - (b.order || 0);
+        }).map(function(entry) {
+            if(!entry.title) {
+                entry.title = entry.key;
+            }
+            if(entry.key) {
+                entry.children = findNavigationEntriesExtended(nodes, entry.key);
+            }
+            return entry;
+        });
+    }
+
+    eleventyConfig.addNunjucksFilter('eleventyNavigationExtended', findNavigationEntriesExtended);
 
     // Customize Markdown library settings:
     eleventyConfig.amendLibrary("md", mdLib => {

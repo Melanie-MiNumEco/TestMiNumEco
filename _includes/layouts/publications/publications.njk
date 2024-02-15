@@ -1,0 +1,65 @@
+---
+layout: layouts/base.njk
+---
+
+{% include "components/breadcrumb.njk" %}
+
+<h1>{{ title }}</h1>
+
+{% set postslist = collections.all | eleventyNavigationExtended("publications") %}
+
+<div class="fr-grid-row fr-grid-row--gutters fr-py-3w">
+
+{% for post in postslist | reverse %}
+  {% if post.data.focus %}
+  <div class="fr-col-12">
+    <div class="fr-card fr-card--horizontal fr-enlarge-link">
+        <div class="fr-card__body">
+            <h2 class="fr-card__title">
+                <a href="{{ post.url | url }}" class="fr-card__link">{{ post.title }}</a>
+            </h2>
+            {% if post.data.description %}
+            <p class="fr-card__desc">
+              {{ post.data.description }}
+            </p>
+            {% endif %}
+        </div>
+        <div class="fr-card__img">
+            <img src="{{ post.image }}" loading="lazy" alt="">
+        </div>
+    </div> 
+  </div>
+  {% endif %}
+{% endfor %}
+
+</div>
+
+<h2>Autres ressources</h2>
+
+<div class="fr-grid-row fr-grid-row--gutters">
+
+{% for post in postslist | reverse %}
+  {% if not post.data.focus %}
+  <div class="fr-col-12 fr-col-md-4">
+    <div class="fr-card fr-enlarge-link">
+        <div class="fr-card__body">
+            
+            <h3 class="fr-card__title">
+                <a href="{{ post.url | url }}" class="fr-card__link">{{ post.title }}</a>
+            </h3>
+            
+            {% if post.data.description %}
+            <p class="fr-card__desc">
+              {{ post.data.description }}
+            </p>
+            {% endif %}
+        </div>
+        <div class="fr-card__img">
+            <img src="{{ post.image }}" alt="">
+        </div>
+    </div> 
+  </div>
+  {% endif %}
+{% endfor %}
+
+</div>
