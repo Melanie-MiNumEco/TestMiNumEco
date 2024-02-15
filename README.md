@@ -13,6 +13,7 @@
     - [ ] Revoir plan-du-site.njk (fusionner avec sitemap.njk)
     - [ ] Corriger les URLs invalides
         - [ ] Utiliser le filtre `locale_url`
+    - [ ] Migrer les metadata
 - [ ] Déploiement
     - [ ] Configurer les redirections côté serveur (ex. /fr => /)
     - [ ] Reconfigurer les workflows (rapatrier fichiers pki-validation ? CNAME ?)
