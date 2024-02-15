@@ -1,3 +1,19 @@
+## WIP migration depuis https://github.com/DISIC/MiNumEco vers eleventy-dsfr
+
+- [ ] Finir de migrer le contenu
+    - [ ] Tester et corriger les pages de /publications
+    - [ ] Revoir plan-du-site.njk (fusionner avec sitemap.njk ?)
+    - [ ] Manque declaration-ecoconception, financement, formations, reglementations, thematiques
+    - [ ] Corriger les URLs invalides
+        - [ ] Utiliser le filtre `locale_url`
+- [ ] Déploiement
+    - [ ] Configurer les redirections côté serveur (ex. /fr => /)
+    - [ ] Reconfigurer les workflows (pki-validation ? CNAME ?)
+- [ ] Refactoring
+    - [ ] Factoriser les layouts
+        - [ ] Utiliser les composants d'eleventy-dsfr
+    - [ ] Réduire les dépendances à des filtres custom
+
 # MiNumEco - Mission interministérielle numérique écoresponsable
 
 Code du site web https://ecoresponsable.numerique.gouv.fr/
