@@ -1,0 +1,85 @@
+---
+layout: layouts/publications/bonne-pratique/default.njk
+---
+
+<p>
+    {% for thematique in collections.guideBpNrThematique %}
+        {% if thematique.data.eleventyNavigation.key == eleventyNavigation.parent %}
+            <a class="fr-tag fr-mb-1w" href="/publications/bonnes-pratiques/bonnes-pratiques/#{{ eleventyNavigation.parent }}">{{ thematique.data.title }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% set priorityCssClass = {
+        'Prioritaire': 'fr-tag--green-emeraude',
+        'Recommandée': 'fr-tag--brown-caramel',
+        'Aller plus loin': 'fr-tag--purple-glycine'
+    } %}
+
+    <a class="fr-tag {{ priorityCssClass[priority] }} fr-mb-1w" href="/publications/bonnes-pratiques/bonnes-pratiques/?priority={{ priority | safe }}">{{ priority | safe }}</a>
+
+    {% set difficultyCssClass = {
+        'Facile': 'fr-tag--green-emeraude',
+        'Moyenne': 'fr-tag--brown-caramel',
+        'Difficile': 'fr-tag--purple-glycine'
+    } %}
+
+    {% set difficultyTagLabel = {
+        'Facile': 'Facile à mettre en œuvre',
+        'Moyenne': 'Difficulté de mise en œuvre moyenne',
+        'Difficile': 'Difficile à mettre en œuvre'
+    } %}
+
+    <a class="fr-tag {{ difficultyCssClass[difficulty] }} fr-mb-1w" href="/publications/bonnes-pratiques/bonnes-pratiques/?difficulty={{ difficulty | safe }}">{{ difficultyTagLabel[difficulty] }}</a>
+</p>
+
+{{ content | safe }}
+
+<h2>Pilotage</h2>
+
+<h3>{% if who.length > 1 %}Exemples de pilotes{% else %}Exemple de pilote{% endif %}</h3>
+
+{% for item in who %}
+    <a class="fr-tag fr-tag--yellow-tournesol fr-mb-1w" href="/publications/bonnes-pratiques/bonnes-pratiques/?who={{ item | safe }}">{{ item }}</a>
+{% endfor %}
+
+{% if indicators.length %}
+    <h3>{% if indicators.length > 1 %}Exemples d'indicateurs de pilotage{% else %}Exemple d'indicateur de pilotage{% endif %}</h3>
+
+    <ul>
+    {% for indicator in indicators %}
+        <li>{{ indicator }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+{% set precedenteBonnePratique = null %}
+{% set couranteBonnePratique = null %}
+{% set suivanteBonnePratique = null %}
+
+{% for bonnePratique in collections.all | eleventyNavigationExtended(eleventyNavigation.parent) %}
+    {% if not suivanteBonnePratique %}
+        {% if couranteBonnePratique %}
+            {% set suivanteBonnePratique = bonnePratique %}
+        {% else %}
+            {% if bonnePratique.data.idbp == idbp %}
+                {% set couranteBonnePratique = bonnePratique %}
+            {% else %}
+                {% set precedenteBonnePratique = bonnePratique %}
+            {% endif %}
+        {% endif %}
+    {% endif %}
+{% endfor %}
+
+<nav class="fr-grid-row fr-grid-row--gutters fr-py-3w">
+  <div class="fr-col-12 fr-col-sm-6 fr-col-md-6">
+    {% if precedenteBonnePratique %}
+        <a class="fr-link fr-fi-arrow-left-line fr-link--icon-left" href="{{ precedenteBonnePratique.url }}">Page précédente :<br />{{ precedenteBonnePratique.data.title }}</a>
+    {% endif %}
+  </div>
+  
+  <div class="fr-col-12 fr-col-sm-6 fr-col-md-6 text-align--right">
+    {% if suivanteBonnePratique %}
+        <a class="fr-link fr-fi-arrow-right-line fr-link--icon-right" href="{{ suivanteBonnePratique.url }}">Page suivante :<br />{{ suivanteBonnePratique.data.title }}</a>
+    {% endif %}
+  </div>
+</nav>
