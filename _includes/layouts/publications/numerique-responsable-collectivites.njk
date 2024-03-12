@@ -81,7 +81,7 @@ layout: layouts/base.njk
         {{ content | safe }}
 
         {% if page.url != '/publications/strategie-numerique-responsable-des-collectivites/' and page.url != '/publications/strategie-numerique-responsable-des-collectivites/catalogue-outils/' %}
-            {% include "./pagination.njk" %}
+            {% include "pagination.njk" %}
         {% endif %}
 
     </div>
