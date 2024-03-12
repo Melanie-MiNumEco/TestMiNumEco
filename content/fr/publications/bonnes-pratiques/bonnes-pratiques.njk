@@ -9,7 +9,7 @@ eleventyExcludeFromCollections: true
 eleventyNavigation:
   key: guideBpNr
 ---
-{% set thematiques = collections.all | eleventyNavigationExtended("guideBpNr") %}
+{% assign thematiques = collections.all | eleventyNavigationExtended("guideBpNr") %}
 
 <p>
     <a class="fr-link fr-fi-download-line fr-link--icon-left" href="{{ metadata.guideBonnesPratiques.documentUrl }}">Télécharger en PDF ({{ metadata.guideBonnesPratiques.documentWeightInMo }} Mo)</a>
@@ -30,7 +30,7 @@ eleventyNavigation:
     </ul>
 </nav>
 
-{% set thematiquesContent = collections.guideBpNrThematique %}
+{% assign thematiquesContent = collections.guideBpNrThematique %}
 
 {% for thematique in thematiques %}
     <h2 id="{{ thematique.key }}">{{ thematique.title }}</h2>
