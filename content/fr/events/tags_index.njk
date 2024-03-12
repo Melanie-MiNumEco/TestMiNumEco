@@ -1,8 +1,0 @@
----
-title: Tags
-layout: layouts/page.njk
-permalink: "/{{ lang }}/agenda/tags/"
----
-{% set tags = collections.events | filterCollectionLang | getAllTags %}
-{% set tagsUrl = "/agenda/tags/" %}
-{% include "components/taggroup.njk" %}
